@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import { Cartesian3 } from "cesium";
+import { Viewer, Entity } from "resium";
+import * as Cesium from "cesium"
+
+const position = Cartesian3.fromDegrees(-74.0707383, 40.7117244, 100);
+const pointGraphics = { pixelSize: 10 };
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Viewer full>
+        <Entity position={position} point={pointGraphics} />
+      </Viewer>
     </div>
   );
 }
