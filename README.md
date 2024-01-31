@@ -8,7 +8,6 @@ Ceisum with React
 ```
 npm install
 npm run start
-
 ```
 
 # Reference
