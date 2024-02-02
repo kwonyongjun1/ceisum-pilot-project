@@ -4,11 +4,14 @@ Ceisum with React
 
 # Running this application
 
-
 ```
 npm install
 npm run start
 ```
+# Goal
+- CeisumIon 3D 데이터 연계
+- 표출된 3D 데이터 편집
+
 
 # Reference
 
