@@ -11,7 +11,7 @@ npm run start
 # Goal
 - CeisumIon 3D 데이터 연계
 - 표출된 3D 데이터 편집
-
+- 편집된 3D 데이터 DB 저장
 
 # Reference
 
