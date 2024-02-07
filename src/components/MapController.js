@@ -1,7 +1,7 @@
 import React from "react";
 import * as Cesium from "cesium";
 import { addAssetOnMap, remove, set } from "../map/handler";
-
+import { flyTo } from "../map/viewer";
 
 function MapController() {
     const position_GM = Cesium.Cartesian3.fromDegrees( 126.864444,  37.477778, 500); // korea position  
