@@ -4,6 +4,7 @@ import { create, fromIonAssetId, flyTo } from "../map/viewer"
 import { createEventHandler } from "../map/handler";
 
 function CesiumMap(){
+    const position_GM = Cesium.Cartesian3.fromDegrees( 126.864444,  37.477778, 500); // korea position  
 
     const init = async() => {
         create()
