@@ -9,15 +9,6 @@ export const options = {
 
 export let viewer = {};
 
-let _resolve;
-
-/**
- * resolve: viewer 반환
- */
-export const isCreated = new Promise((resolve,reject)=>{
-    _resolve = resolve;
-});
-
 
 /**
  * viewer 생성(3D 지도)
@@ -34,7 +25,6 @@ export const create = async (_options) => {
         terrain: Cesium.Terrain.fromWorldTerrain(),
     });
 
-    _resolve(viewer);
     return viewer;
 };
 

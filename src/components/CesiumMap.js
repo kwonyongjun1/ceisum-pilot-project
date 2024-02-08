@@ -26,9 +26,7 @@ function CesiumMap(){
     }
 
     useEffect(()=>{
-        if(!isMapExist){
             init();
-        }
     },[]);
 
     return(
