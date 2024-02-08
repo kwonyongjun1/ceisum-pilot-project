@@ -49,8 +49,6 @@ function MapController() {
 
         if(Cesium.defined(position)){
             const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2451439);
-            console.log(position);
-            debugger;
             tileset.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(position);
             viewer.scene.primitives.add(tileset);
 
