@@ -7,13 +7,22 @@ import { add as addEntities, removeAll as removeAllEntities} from "../map/entiti
 function MapController() {
     const position_GM = Cesium.Cartesian3.fromDegrees( 126.864444,  37.477778, 500); // korea position  
 
+    /**
+     * 클릭 이벤트 설정
+     * 우클릭 시 액션 취소 
+     * @param {*} action 
+     */
+    const setClickEvent = (action) => {
+        set(action, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+        set(()=> remove(Cesium.ScreenSpaceEventType.LEFT_CLICK), Cesium.ScreenSpaceEventType.RIGHT_CLICK);
+    }
+    
     const setAddRedBoxEvent = () =>{
-        set(addRedBox, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-        set(removeLeftClickEvent, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
+        setClickEvent(addRedBox);
     }
 
-    const removeLeftClickEvent = () =>{
-        remove(Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    const setAddBuildingEvent = () =>{
+        setClickEvent(addBuilding);
     }
 
     const clearAllAsset = () =>{
@@ -35,11 +44,6 @@ function MapController() {
         }
     }
 
-    const setAddBuildingEvent = () =>{
-        set(addBuilding, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-        set(removeLeftClickEvent, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
-
-    }
     const addBuilding = async (click) =>{
         // 클릭 지점의 레이를 가져옵니다.
         const ray = viewer.camera.getPickRay(click.position);
@@ -58,11 +62,23 @@ function MapController() {
         }
     }
 
+    const setDisplayLonLatOnMouse = () =>{
+
+    }
+
+    const displayLonLat = (event) =>{
+        let earthPosition = viewer.scene.pickPosition(event.position);
+
+        if(Cesium.defined(earthPosition)){
+        }
+    }
+
     return(
         <div>
             <div>
                 <label> Move </label>
                 <button onClick={()=>{flyTo(position_GM)}}>광명 이동</button>
+                <button >위,경도 표출</button>
             </div>
             <div>
                 <label> Asset </label>
