@@ -45,33 +45,46 @@ function MapController() {
     }
 
     const addBuilding = async (click) =>{
-        // 클릭 지점의 레이를 가져옵니다.
-        const ray = viewer.camera.getPickRay(click.position);
+        let cartesian = viewer.scene.pickPosition(click.position);
 
-        // 레이를 사용하여 지형 표면의 위치를 가져옵니다.
-        const position = viewer.scene.globe.pick(ray, viewer.scene);
+        if(Cesium.defined(cartesian)){
+            await Cesium.Cesium3DTileset.fromIonAssetId(2451439)
+                .then((tileset)=>{
+                    
+                    tileset.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(cartesian);
+                    viewer.scene.primitives.add(tileset);
+                    
+                })
+            // tileset.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(position);
+        
+            // viewer.scene.primitives.add(tileset);
 
-        if(Cesium.defined(position)){
-            const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2451439);
-            tileset.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(position);
-            viewer.scene.primitives.add(tileset);
+            // tileset.allTilesLoaded.addEventListener(()=>{
 
-            tileset.allTilesLoaded.addEventListener(()=>{
-                console.log("건물 생성");
-            });
+            //     console.log("건물 생성");
+            //     alert("생성됨");
+            // });
         }
     }
 
-    const setDisplayLonLatOnMouse = () =>{
-
-    }
-
-    const displayLonLat = (event) =>{
-        let earthPosition = viewer.scene.pickPosition(event.position);
-
-        if(Cesium.defined(earthPosition)){
+    
+    /**
+     * entity 정보 가져오기 수정중
+     * @param {*} movement 
+     */
+    const getEntityInfo = (movement) =>{
+        let pickedObject = viewer.scene.pick(movement.endPosition);
+        if (Cesium.defined(pickedObject) && pickedObject.id === entity) {
+            // 픽킹된 객체가 모델인 경우 정보 출력
+            console.log(entity.description);
+            entity.label.show = true;
+            entity.label.text = entity.description;
+        }else{
+            entity.label.show = false;
         }
     }
+
+
 
     return(
         <div>
