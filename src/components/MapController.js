@@ -67,9 +67,35 @@ function MapController() {
         }
     }
 
-    
     /**
-     * entity 정보 가져오기 수정중
+     * TODO: 수정중
+     * zoomTo 
+     */
+    const moveZoomTo = async ()=>{
+        let entity_ = await viewer.entities.add({
+            position: Cesium.Cartesian3.fromDegrees(yeouido.destination.lon, yeouido.destination.lat, yeouido.destination.height),
+            point: {
+                color: Cesium.Color.YELLOW,
+                pixelSize: 10
+            },
+            label: {
+                show : false,
+                backgroundColor: Cesium.Color.BLACK,
+                font: '25px sans-serif',
+                horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+                verticalOrigin: Cesium.VerticalOrigin.TOP,
+                pixelOffset: new Cesium.Cartesian2(15, 0)
+            },
+        });
+        entity_.description = '여의도 위치 입니다.';
+
+        setEntity(entity_)
+        zoomTo(entity);
+    }
+
+    /**
+     * TODO: 수정중
+     * entity 정보 가져오기
      * @param {*} movement 
      */
     const getEntityInfo = (movement) =>{
